@@ -43,9 +43,10 @@ $(function () {
   $('#hour-1900 .description').val(localStorage.getItem('hour-1900'));
   
   // TODO: Add code to display the current date in the header of the page.
+  let time=dayjs().format('hh:mm');
   let now=dayjs().format("MM/DD/YYYY");
    console.log(now);
   $('#currentDay').text(dayjs().format("MM/DD/YYYY"));
   $('#currentTime').text(dayjs().format('hh:mm'));
-
+    console.log(time)
 });
