@@ -1,7 +1,7 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-$(function () {
+$(document).ready(function () {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -43,10 +43,63 @@ $(function () {
   $('#hour-1900 .description').val(localStorage.getItem('hour-1900'));
   
   // TODO: Add code to display the current date in the header of the page.
+  let currentHour =dayjs().hour().min
+  console.log(currentHour)
   let time=dayjs().format('hh:mm');
   let now=dayjs().format("MM/DD/YYYY");
    console.log(now);
-  $('#currentDay').text(dayjs().format("MM/DD/YYYY"));
-  $('#currentTime').text(dayjs().format('hh:mm'));
-    console.log(time)
+   $('#currentHour').text(currentHour)
+   $('#currentDay').text(dayjs().format("MM/DD/YYYY"));
+   $('#currentTime').text(dayjs().format('hh:mm'));
+   console.log(time)
+
+   function paintTheRow() {
+    let currentHour = dayjs ().hour();
+    // currentHour = 12;
+    $(".time-block").each(function () {
+      let timeDiv = $(this).attr('id').split("-")[1];
+
+      console.log("currentHour = ",  currentHour);
+      console.log("timeDiv= ", timeDiv);
+      if (currentHour == timeDiv) {
+        $(this).removeClass("future")
+        $(this).removeClass("past")
+        $(this).addClass("present")
+  
+      } else if (currentHour < timeDiv) {
+        $(this).removeClass("present")
+        $(this).removeClass("past")
+        $(this).addClass("future")
+  
+      } else if (currentHour > timeDiv) {
+        $(this).removeClass("present")
+        $(this).removeClass("future")
+        $(this).addClass("past")
+      }
+    });
+  }
+
+  paintTheRow();
 });
+  //   $(".row time-block present").each(function () {
+  //     let timeDiv = $(this).data('hour')
+  //     if (currentHour == timeDiv) {
+  //       $(this).removeClass("future")
+  //       $(this).removeClass("past")
+  //       $(this).addClass("present")
+  
+  //     } else if (currentHour < timeDiv) {
+  //       $(this).removeClass("present")
+  //       $(this).removeClass("past")
+  //       $(this).addClass("future")
+  
+  //     } else if (currentHour > timeDiv) {
+  //       $(this).removeClass("present")
+  //       $(this).removeClass("future")
+  //       $(this).addClass("past")
+  //     }
+  //   })
+  // })
+
+
+
